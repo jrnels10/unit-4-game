@@ -1,38 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Wild West</title>
+    <meta charset="UTF-8">
+    <title>Wild West</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 </head>
+
 <body>
+    <div class="container-fluid w-100">
+        <img src="assets/images/west_background.jpg">
+        <div class="row card-img-overlay" style="height: 60%">
+            <div class="card btn btn-primary m-2 p-0 w-25" id="the_good">
+                <img src="assets/images/the_good_resize.jpg" class="img-thumbnail w-100 h-100" alt="Card image cap">
+                <h3 class="card-img-overlay p-2 good-health" style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health</h3>
+                <h3 class="card-img-overlay p-2 good-attack" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack</h3>
+            </div>
+            <div class="card btn btn-primary m-2 p-0 w-25" id="the_bad">
+                <img src="assets/images/the_bad.jpg" class="img-thumbnail w-100 h-100" alt="Card image cap">
+                <h3 class="card-img-overlay p-2 good-health" style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health</h3>
+                <h3 class="card-img-overlay p-2 good-attack" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack</h3>
+            </div>
+            <div class="card btn btn-primary m-2 p-0 w-25" id="the_ugly">
+                <img src="assets/images/the_ugly.jpg" class="img-thumbnail w-100 h-100" alt="Card image cap">
+                <h3 class="card-img-overlay p-2 good-health" style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health</h3>
+                <h3 class="card-img-overlay p-2 good-attack" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack</h3>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+
+            var main = $('body');
+            // =============================================================
+            // Create characters
+            // create objects for each of the characters.
+            // get characters to display on the screen as buttons
+            // The Good character
+            var theGood = {
+                name: 'clint',
+                health: 100,
+                attackPower: 20,
+            }
+            var goodbtns = main.find('#the_good');
+            goodbtns.attr('name', "clint");
+            $(goodbtns).on("click", function () {
+                console.log(goodbtns);
+            })
+
+            // The Bad character
+            var theBad = {
+                name: "bounty",
+                health: 200,
+                attackPower: 40,
+            }
+            var badbtns = main.find('#the_bad');
+            badbtns.attr(theBad);
+            $(badbtns).on("click", function () {
+                console.log(badbtns);
+            })
+
+            // The Ugly character
+            var theUgly = {
+                name: "prisoner",
+                health: 75,
+                attackPower: 60,
+            }
+            var btns = main.find('#the_ugly');
+            btns.attr(theUgly);
+            btns.append(theUgly);
+            $(btns).on("click", function () {
+                console.log(btns);
+            })
+            // =============================================================
+
+
+
+            // create functions for each player with unique attack power
+            // select specific player
+
+            // other characters become enemy
+
+            // select specific character to fight
+
+            // ------------------------------------------------
+
+            // create button
+
+            // attack button
+
+            // button changes health of characters
+
+            // button changes the health of the spefici characters and that of the enemy
+
+            // restart button which restarts the game
+
+            // if defeated the game stops
+        })
+    </script>
 </body>
-<script>
-    // Create characters
 
-    // Each character needs attributes
-        // create objects for each of the characters.
-        // create functions for each player with unique attack power
-
-    // select specific player
-
-    // other characters become enemy
-
-    // select specific character to fight
-
-    // ------------------------------------------------
-
-    // create button
-
-    // attack button
-
-    // button changes health of characters
-
-    // button changes the health of the spefici characters and that of the enemy
-
-    // restart button which restarts the game
-
-    // if defeated the game stops
-
-</script>
 </html>
