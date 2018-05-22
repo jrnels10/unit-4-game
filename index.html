@@ -57,12 +57,13 @@
         $(document).ready(function () {
 
             var main = $('body');
+            var selected = false;
             // =============================================================
             // create objects for each of the characters.
 
             // The Good character
             var theGood = {
-                image: 'assets/images/the_good.jpg',
+                image: 'assets/images/the_good_resize.jpg',
                 name: 'clint',
                 health: 60,
                 attackPower: 20,
@@ -71,7 +72,7 @@
 
             // The Bad character
             var theBad = {
-                image: 'assets/images/the_good.jpg',
+                image: 'assets/images/the_bad.jpg',
                 name: "bounty",
                 health: 200,
                 attackPower: 40,
@@ -79,7 +80,7 @@
 
             // The Ugly character
             var theUgly = {
-                image: 'assets/images/the_good.jpg',
+                image: 'assets/images/the_ugly.jpg',
                 name: "prisoner",
                 health: 75,
                 attackPower: 60,
@@ -94,37 +95,52 @@
             var the_ugly = $("#the_ugly");
 
             $('.character').on("click", function () {
-                console.log($(this).attr("id"));
-                // console.log(goodBtn)
-                if ($(this).attr("id") === 'the_good') {
-                    // console.log(charPlayer[0].name)
-                    for (i = 1; i < charPlayer.length; i++) {
-                        var nuetralChar = $('<div>');
-                        nuetralChar.addClass("character card btn btn-primary m-2 p-0 w-100 h-100");
-                        nuetralChar.text(charPlayer[i].name);
-                        // nuetralChar.data('data-char-name',charPlayer[i].name);
-                       
-                        console.log(nuetralChar)
-                        
-                        $('.nuetral').append(nuetralChar.data(charPlayer[i]));
-                        // console.log('.nuetral')
+                if (selected === true) {
+                    return;
+                } else {
+                    selected = true;
+                    console.log($(this).attr("id"));
+                    // console.log(goodBtn)
+                    if ($(this).attr("id") === 'the_good') {
+                        for (i = 1; i < charPlayer.length; i++) {
+                            var nuetralChar = $('<div>');
+                            nuetralChar.addClass("character row");
+                            nuetralChar.html(`
+                        <div class='col-3'>
+                            <h3>
+                            Hello I'm ${charPlayer[i].name}
+                            </h3>
+                            <img src='${charPlayer[i].image}'>
+                        </div>
+                        `);
+                            // nuetralChar.text(charPlayer[i].name);
+                            nuetralChar.data('data-char-name', charPlayer[i].name);
 
-                        $(nuetralChar).on("click", function () {
-                            // console.log(nuetralChar)
-                        //     if (($(nuetralChar).attr(charPlayer)) === (theBad)) {
-                        //         console.log("now select the enemy")
-                        //     }
-                        })
+                            console.log(nuetralChar)
+
+                            $('.nuetral').append(nuetralChar.data(charPlayer[i]));
+                            // console.log('.nuetral')
+
+                            $(nuetralChar).on("click", function () {
+                                // console.log(nuetralChar)
+                                //     if (($(nuetralChar).attr(charPlayer)) === (theBad)) {
+                                //         console.log("now select the enemy")
+                                //     }
+                            })
+                        }
+
+
                     }
+                    else if ($(this).attr("id") === 'the_bad') {
+                        console.log("bad")
+                    }
+                    else {
+                        console.log("ugly")
+                    }
+                }
 
 
-                }
-                else if ($(this).attr("id") === 'the_bad') {
-                    console.log("bad")
-                }
-                else {
-                    console.log("ugly")
-                }
+
             })
 
 
