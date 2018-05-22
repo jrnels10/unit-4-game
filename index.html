@@ -47,7 +47,6 @@
         <div class="row" style="height: 50%">
             <div class="col-3">
                 <div class="nuetral" style="font-size: 25px">
-
                 </div>
             </div>
         </div>
@@ -100,21 +99,22 @@
                 if ($(this).attr("id") === 'the_good') {
                     // console.log(charPlayer[0].name)
                     for (i = 1; i < charPlayer.length; i++) {
-                        var nuetralChar = $('<div>This is a new div</div>');
+                        var nuetralChar = $('<div>');
                         nuetralChar.addClass("character card btn btn-primary m-2 p-0 w-100 h-100");
-                        nuetralChar.text(charPlayer[i].name).css('color');
-                        nuetralChar.attr("data-char",charPlayer[i]);
-                        console.log(charPlayer[i])
+                        nuetralChar.text(charPlayer[i].name);
+                        // nuetralChar.data('data-char-name',charPlayer[i].name);
+                       
+                        console.log(nuetralChar)
                         
-                        // $('.nuetral').append(nuetralChar);
-                        
+                        $('.nuetral').append(nuetralChar.data(charPlayer[i]));
+                        // console.log('.nuetral')
 
-                        // $(nuetralChar).on("click", function () {
-
+                        $(nuetralChar).on("click", function () {
+                            // console.log(nuetralChar)
                         //     if (($(nuetralChar).attr(charPlayer)) === (theBad)) {
                         //         console.log("now select the enemy")
                         //     }
-                        // })
+                        })
                     }
 
 
