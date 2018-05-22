@@ -95,34 +95,34 @@
             var the_ugly = $("#the_ugly");
 
             $('.character').on("click", function () {
+                // if character selected, stop the function
                 if (selected === true) {
                     return;
+                // otherwise select the character
                 } else {
                     selected = true;
                     console.log($(this).attr("id"));
                     // console.log(goodBtn)
                     if ($(this).attr("id") === 'the_good') {
+                        $('#the_bad').hide();
+                        $('#the_ugly').hide();
                         for (i = 1; i < charPlayer.length; i++) {
                             var nuetralChar = $('<div>');
-                            nuetralChar.addClass("character row");
+                            nuetralChar.addClass("character row opponent");
                             nuetralChar.html(`
-                        <div class='col-3'>
-                            <h3>
-                            Hello I'm ${charPlayer[i].name}
-                            </h3>
-                            <img src='${charPlayer[i].image}'>
-                        </div>
-                        `);
-                            // nuetralChar.text(charPlayer[i].name);
-                            nuetralChar.data('data-char-name', charPlayer[i].name);
-
-                            console.log(nuetralChar)
+                            <div class='col-3'>
+                                <h3>
+                                Hello I'm ${charPlayer[i].name}
+                                </h3>
+                                <img src='${charPlayer[i].image}'>
+                            </div>
+                            `);
 
                             $('.nuetral').append(nuetralChar.data(charPlayer[i]));
                             // console.log('.nuetral')
 
-                            $(nuetralChar).on("click", function () {
-                                // console.log(nuetralChar)
+                            $('.opponent').on("click", function () {
+                                console.log(nuetralChar)
                                 //     if (($(nuetralChar).attr(charPlayer)) === (theBad)) {
                                 //         console.log("now select the enemy")
                                 //     }
