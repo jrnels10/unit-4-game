@@ -26,22 +26,22 @@
             <div class='col-3'>
                 <div class="character card btn btn-primary m-2 p-0 w-100 h-100" id="the_good">
                     <img src="assets/images/the_good_resize.jpg" class="img-thumbnail h-100" alt="Card image cap">
-                    <h3 class="health card-img-overlay p-2" value="100" style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health</h3>
-                    <h3 class="attack card-img-overlay p-2" value="20" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack</h3>
+                    <h3 class="health card-img-overlay p-2" id="goodHealth" style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health</h3>
+                    <h3 class="attack card-img-overlay p-2" id="goodAttack" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack</h3>
                 </div>
             </div>
             <div class="col-3">
                 <div class=" character card btn btn-primary m-2 p-0 w-100 h-100" id="the_bad">
                     <img src="assets/images/the_bad.jpg" class="img-thumbnail h-100" alt="Card image cap">
-                    <h3 class="health card-img-overlay p-2" value="80" style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health</h3>
-                    <h3 class="attack card-img-overlay p-2" value="30" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack</h3>
+                    <h3 class="health card-img-overlay p-2" id="badHealth" style="background-color: maroon; top: 45%; height: 40px; opacity: .75"></h3>
+                    <h3 class="attack card-img-overlay p-2" id="badAttack" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack</h3>
                 </div>
             </div>
             <div class="col-3">
                 <div class=" character card btn btn-primary m-2 p-0 w-100 h-100" id="the_ugly">
                     <img src="assets/images/the_ugly.jpg" class="img-thumbnail h-100" alt="Card image cap">
-                    <h3 class="health card-img-overlay p-2 " value="120" style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health</h3>
-                    <h3 class="attack card-img-overlay p-2" value="10" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack</h3>
+                    <h3 class="health card-img-overlay p-2 " id="uglyHealth" style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health</h3>
+                    <h3 class="attack card-img-overlay p-2" id="uglyAttack" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack</h3>
                 </div>
             </div>
         </div>
@@ -52,20 +52,24 @@
 
         </div>
     </div>
+    <div style="height: 100px; width: 80px; background-color: green" id="buttons">Attack</div>
+    <div style="height: 100px; width: 80px; background-color: red" id="reset" onclick="reset()">Reset</div>
+
     <script>
         $(document).ready(function () {
             var main = $('body');
             // =============================================================
             // create objects for each of the characters.
             //=========================================================
-
+            // The Good character
             var theGood = {
                 image: 'assets/images/the_good_resize.jpg',
                 name: 'clint',
-                health: 60,
+                health: 160,
                 attackPower: 20,
-
             };
+            $('#goodHealth').text('Health: ' + theGood.health);
+            $('#goodAttack').text('Attack: ' + theGood.attackPower);
             // The Bad character
             var theBad = {
                 image: 'assets/images/the_bad.jpg',
@@ -77,54 +81,57 @@
             var theUgly = {
                 image: 'assets/images/the_ugly.jpg',
                 name: "prisoner",
-                health: 75,
+                health: 175,
                 attackPower: 60,
             };
+            var charPlayer = [];
+            charPlayer.push(theGood, theBad, theUgly);
             var selected = false;
-            firstPlayer = [];
+            var firstPlayer = [];
             var enemyPlayer = [];
             var secondChar = [];
             var thirdRow = [];
-            var charPlayer = [];
-            charPlayer.push(theGood, theBad, theUgly);
-            var firstPlayer = [];
-
-                //===============================================================================
-                // =============first player being selected======================================
-                //===============================================================================
+            var damageHealth = 0;
+            var neutral = main.find('.neutral');
+            var btns = main.find("#buttons");
+            var resetbtns = main.find("#reset");
 
 
-                $('.character').on("click", function () {
-                        if ($(this).attr('id') === 'the_good') {
-                        firstPlayer = (theGood);
-                        $('#the_bad').hide();
-                        $('#the_ugly').hide();
-                        console.log(firstPlayer);
-                        secondChar.push(theBad,theUgly)
-                        console.log(secondChar)
-                        }
+            //===============================================================================
+            // =============first player being selected======================================
+            //===============================================================================
 
-                        else if ($(this).attr('id') === 'the_bad') {
-                        firstPlayer =(theBad);
-                        secondChar.push(theGood,theUgly)
-                        $('#the_good').hide();
-                        $('#the_ugly').hide();
-                        console.log(firstPlayer);
-                        console.log(secondChar)
-                        }
-                        else {
-                        firstPlayer = (theUgly);
-                        secondChar.push(theGood,theBad)
-                        $('#the_good').hide();
-                        $('#the_bad').hide();
-                        console.log(firstPlayer);
-                        console.log(secondChar)
-                        }
-                        for (var i = 0; i < secondChar.length; i++) {
-                            console.log(secondChar.length)
-                            var nuetralChar = $('<div>');
-                            nuetralChar.addClass("col-3 h-100");
-                            nuetralChar.html(`
+
+            $('.character').on("click", function () {
+                if ($(this).attr('id') === 'the_good') {
+                    firstPlayer = (theGood);
+                    $('#the_bad').hide();
+                    $('#the_ugly').hide();
+                    console.log(firstPlayer);
+                    secondChar.push(theBad, theUgly)
+                    console.log(secondChar)
+                }
+                else if ($(this).attr('id') === 'the_bad') {
+                    firstPlayer = (theBad);
+                    secondChar.push(theGood, theUgly)
+                    $('#the_good').hide();
+                    $('#the_ugly').hide();
+                    console.log(firstPlayer);
+                    console.log(secondChar)
+                }
+                else {
+                    firstPlayer = (theUgly);
+                    secondChar.push(theGood, theBad)
+                    $('#the_good').hide();
+                    $('#the_bad').hide();
+                    console.log(firstPlayer);
+                    console.log(secondChar)
+                }
+                for (var i = 0; i < secondChar.length; i++) {
+                    console.log(secondChar.length)
+                    var nuetralChar = $('<div>');
+                    nuetralChar.addClass("col-3 h-100");
+                    nuetralChar.html(`
 
                                 <div class="opponent card btn btn-primary m-2 p-0 w-100 h-100" id='${secondChar[i].name}'>
                                     <img src='${secondChar[i].image}' style=' height:100%'>
@@ -134,34 +141,34 @@
 
                             `);
 
-                            $('.neutral').append(nuetralChar);
-                        }
+                    neutral.append(nuetralChar);
+                }
 
-                    //==============================================================================
-                    //============= select rival character ==================
-                    //===============================================================
+                //==============================================================================
+                //============= select rival character ==================
+                //===============================================================
 
 
-                    $('.opponent').on("click", function () {
-                        console.log($(this).attr('id'))
-                        if ($(this).attr('id') === 'clint') {
+                $('.opponent').on("click", function () {
+                    console.log($(this).attr('id'))
+                    if ($(this).attr('id') === 'clint') {
                         console.log(theGood)
-                        var enemyPlayer =(theGood);
+                        enemyPlayer = (theGood);
                         $(this).hide();
                         //console.log('enemy ' + enemyPlayer);
-                        }
-                        else if ($(this).attr('id') === 'bounty') {
-                        var enemyPlayer =(theBad);
+                    }
+                    else if ($(this).attr('id') === 'bounty') {
+                        enemyPlayer = (theBad);
                         $(this).hide();
-                        }
-                        else {
-                        var enemyPlayer =(theUgly);
+                    }
+                    else {
+                        enemyPlayer = (theUgly);
                         $(this).hide();
-                        }
+                    }
 
-                            var enemyChar = $('<div>');
-                            enemyChar.addClass("col-3 h-100");
-                            enemyChar.html(`
+                    var enemyChar = $('<div>');
+                    enemyChar.addClass("col-3 h-100");
+                    enemyChar.html(`
 
                                 <div class="enemy card btn btn-primary m-2 p-0 w-100 h-100" id='${enemyPlayer.name}'>
                                     <img src='${enemyPlayer.image}' style=' height:100%'>
@@ -171,12 +178,41 @@
 
                             `);
 
-                            $('.enemy').append(enemyChar);
+                    $('.enemy').append(enemyChar);
 
-                    })
+
                 })
 
 
+            })
+
+            btns.on('click', function () {
+                // console.log('first player: ' + firstPlayer.name)
+                // console.log('enemy player: ' + enemyPlayer.name)
+                firstPlayer.health = firstPlayer.health - enemyPlayer.attackPower;
+                enemyPlayer.health = enemyPlayer.health - firstPlayer.attackPower;
+                console.log('firstplayer health: ' + firstPlayer.health)
+                console.log('enemyplayer health: ' + enemyPlayer.health)
+
+                if (firstPlayer.health <= 0) {
+                    console.log('you lose');
+                    reset();
+                }
+                else if (enemyPlayer.health <= 0) {
+                    console.log("you've defeated the first enemy");
+                    alert('Round two');
+
+                }
+            })
+
+            resetbtns.on('click', function reset() {
+                firstPlayer = [];
+                enemyPlayer = [];
+                secondChar = [];
+                thirdRow = [];
+                damageHealth = 0;
+
+            })
 
 
 
@@ -195,17 +231,19 @@
 
 
 
-                //assign value to firstPlayer
 
 
-                //if firstPlayer is selected, run function to move all other characters to neutral row.
+            //assign value to firstPlayer
 
 
-                //once other characters are in neutral row, run function to choose character from neutral row and assign character to rivalPLayer variable.
+            //if firstPlayer is selected, run function to move all other characters to neutral row.
 
-                //if rivalPlayer is selected, run function to move rivalCharacter to enemy row.
 
-                //once enemy character is selected, initiate attack button.
+            //once other characters are in neutral row, run function to choose character from neutral row and assign character to rivalPLayer variable.
+
+            //if rivalPlayer is selected, run function to move rivalCharacter to enemy row.
+
+            //once enemy character is selected, initiate attack button.
             //=====================================================================================================
 
         })
