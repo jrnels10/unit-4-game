@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var main = $('body');
-    // =============================================================
-    // create objects for each of the characters.
-    //=========================================================
+    // =====================================================================================================
+    // ==================create objects and variables for each of the characters.===========================
+    //=====================================================================================================
     // The Good character
     var theGood = {
         image: 'assets/images/the_good_resize.jpg',
@@ -29,6 +29,7 @@ $(document).ready(function () {
     charPlayer.push(theGood, theBad, theUgly);
     var selected = false;
     var firstPlayer = [];
+    var firstHealth = [];
     var enemyPlayer = [];
     var secondChar = [];
     var thirdRow = [];
@@ -36,26 +37,26 @@ $(document).ready(function () {
     var damageHealth = 0;
     var neutral = main.find('.neutral');
     var btns = main.find("#buttons");
-    
-    // ================================================================================
-    //========= When the page loads, display the objects as divs on the DOM.============
-    // =================================================================================
+
+    // ==========================================================================================================
+    //========= When the page loads, display the objects as divs on the DOM.=====================================
+    // ==========================================================================================================
     window.onload = function () {
         for (var i = 0; i < charPlayer.length; i++) {
+            firstHealth = charPlayer[i].health;
             var playerChar = $('<div>');
             playerChar.addClass("col-3 h-100");
             playerChar.html(`
 
                         <div class="character card btn btn-primary m-2 p-0 w-100 h-100" id='${charPlayer[i].name}'>
                             <img src='${charPlayer[i].image}' style=' height:100%'>
-                            <h3 class="health card-img-overlay p-2" id='firstHealth' style="background-color: maroon; top: 45%; height: 40px; opacity: .75"></h3>
-                            <h3 class="attack card-img-overlay p-2" id="firstAttack" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75"></h3>
-                            </div>
+                            <h3 class="health card-img-overlay p-2" id='firstHealth' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${charPlayer[i].health}</h3>
+                            <h3 class="attack card-img-overlay p-2" id="firstAttack" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack: ${charPlayer[i].attackPower}</h3>
+                       </div>
                             
-                            `);
-                            $('.first').append(playerChar);
-                            $('firstHealth').append('Health: ' + charPlayer[i].health)
-                            console.log(charPlayer[i].name)
+                        `);
+            $('.first').append(playerChar);
+            console.log(charPlayer[i].name)
         }
 
 
@@ -66,14 +67,14 @@ $(document).ready(function () {
             console.log("hello")
             if ($(this).attr('id') === 'clint') {
                 firstPlayer = (theGood);
-                playerHealth = (theGood.health)
+                firstHealth = (charPlayer[0].health)
                 $('#bounty').hide();
                 $('#prisoner').hide();
                 secondChar.push(theBad, theUgly)
             }
             else if ($(this).attr('id') === 'bounty') {
                 firstPlayer = (theBad);
-                playerHealth = (theBad.health)
+                firstHealth = (charPlayer[1].health)
                 secondChar.push(theGood, theUgly)
                 $('#clint').hide();
                 $('#prisoner').hide();
@@ -82,16 +83,17 @@ $(document).ready(function () {
             }
             else {
                 firstPlayer = (theUgly);
-                playerHealth = (theUgly.health)
+                firstHealth = (charPlayer[2].health)
                 secondChar.push(theGood, theBad)
                 $('#clint').hide();
                 $('#bounty').hide();
                 console.log(firstPlayer);
                 console.log(secondChar)
             }
-            console.log(firstPlayer.health)
+            // $('#firstHealth').append('Health: ' + firstHealth);
+            console.log(firstHealth)
 
-            
+
             // ===================================================================================
             //========Once character is selected, move the other players to the second row.========
             for (var i = 0; i < secondChar.length; i++) {
@@ -102,15 +104,14 @@ $(document).ready(function () {
 
                         <div class="opponent card btn btn-primary m-2 p-0 w-100 h-100" id='${secondChar[i].name}'>
                             <img src='${secondChar[i].image}' style=' height:100%'>
-                            <h3 class="health card-img-overlay p-2" id='${secondChar[i].health}' style="background-color: maroon; top: 45%; height: 40px; opacity: .75"></h3>
-                            <h3 class="attack card-img-overlay p-2" id="${secondChar[i].attackPower}" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75"></h3>
+                            <h3 class="health card-img-overlay p-2" id='health' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${secondChar[i].health}</h3>
+                            <h3 class="attack card-img-overlay p-2" id="health" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack: ${secondChar[i].attackPower}</h3>
                         </div>
 
                     `);
                 // append the second row of the DOM
                 neutral.append(nuetralChar);
-                
-                
+
             }
 
             //==============================================================================
@@ -140,13 +141,13 @@ $(document).ready(function () {
 
                         <div class="rival card btn btn-primary m-2 p-0 w-100 h-100" id='${enemyPlayer.name}'>
                             <img src='${enemyPlayer.image}' style=' height:100%'>
-                            <h3 class="health card-img-overlay p-2" id='healthEnemy' style="background-color: maroon; top: 45%; height: 40px; opacity: .75"></h3>
-                            <h3 class="attack card-img-overlay p-2" id='attackEnemy' style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75"></h3>
+                            <h3 class="health card-img-overlay p-2" id='healthEnemy' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${enemyPlayer.health}</h3>
+                            <h3 class="attack card-img-overlay p-2" id='attackEnemy' style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack: ${enemyPlayer.attackPower}</h3>
                         </div>
 
                     `);
                 $('.enemy').append(enemyChar)
-                $('#healthEnemy').html('Health: ' + enemyPlayer.health)
+                // $(secondChar[i].health).replaceWith(firstPlayer.health)
             })
         })
     };
@@ -155,7 +156,9 @@ $(document).ready(function () {
 
 
 
-    // $('#firstHealth').html('Health: ' + firstPlayer.health)
+    //=============================================================================================================
+    //============== Attack button ================================================================================
+    // ============================================================================================================
     btns.on('click', function () {
         // console.log('first player: ' + firstPlayer.name)
         // console.log('enemy player: ' + enemyPlayer.name)
@@ -163,67 +166,82 @@ $(document).ready(function () {
         enemyPlayer.health = enemyPlayer.health - firstPlayer.attackPower;
         console.log('firstplayer health: ' + firstPlayer.health)
         console.log('enemyplayer health: ' + enemyPlayer.health)
-        $('#healthEnemy').html('Heath: ' + enemyPlayer.health);
-        $('#firstHealth').html('Health: ' + firstPlayer.health)
-        
+        $('#healthEnemy').html('Health: ' + enemyPlayer.health);
+        $('#firstHealth').html('Health: ' + charPlayer.health)
+
         // if the user loses the battle
         if (firstPlayer.health <= 0) {
-            console.log('you lose');
-            confirm('Do you want to play again?')
-            if (true) {
-                location.reload();
-            }
-            else {
-                alert("loser");
-            }
+            setTimeout(function() {
+                alert('you lose');
+                confirm('Do you want to play again?')
+                if (true) {
+                    location.reload();
+                }
+                else {
+                    alert("loser");
+                }
+            },2);
         }
 
         // if the user wins the battle. enter in other rival character.
         else if (enemyPlayer.health <= 0) {
-            // $('.enemy').hide();
+            setTimeout(function() {
             alert("you've defeated the first enemy");
             alert('Round two');
             $('.opponent').hide();
-            console.log(secondChar)
             enemyDefeated.push(enemyPlayer)
-            // If they match, replace .enemy row with the secondChar[1] character. 
-            if (enemyPlayer.name === secondChar[0].name) {
-                console.log(enemyPlayer)
-                $('.rival').replaceWith(`
-
-                                        <div class="rival card btn btn-primary m-2 p-0 w-100 h-100" id='${secondChar[1].name}'>
-                                            <img src='${secondChar[1].image}' style=' height:100%'>
-                                            <h3 class="health card-img-overlay p-2" id='${secondChar[1].health}' style="background-color: maroon; top: 45%; height: 40px; opacity: .75"></h3>
-                                            <h3 class="attack card-img-overlay p-2" id='${secondChar[1].attackPower}' style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75"></h3>
-                                        </div>
-
-                                        `)
-
-
-            }
-            // else replace .enemy row with the secondChar[0] character.
-            else {
-                $('.rival').replaceWith(`
-
-                                        <div class="rival card btn btn-primary m-2 p-0 w-100 h-100" id='${secondChar[0].name}'>
-                                            <img src='${secondChar[0].image}' style=' height:100%'>
-                                            <h3 class="health card-img-overlay p-2" id='helath' style="background-color: maroon; top: 45%; height: 40px; opacity: .75"></h3>
-                                            <h3 class="attack card-img-overlay p-2" id='${secondChar[0].attackPower}' style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75"></h3>
-                                        </div>
-
-                                        `)
-                $('helath').text('Health: ' + secondChar[0].health);
-            }
-
-
-
-
-
+            console.log(enemyDefeated)
+            replace();
+            },5);
         }
     })
 
 
-    //When 'Restart' button is clicked, reload the page.
+
+    // =============================================================================================================
+    //===========after first has been defeated, it replaces the defeated character with the other character=========
+    // =============================================================================================================
+    function replace() {
+        // If they match, replace .enemy row with the secondChar[1] character. 
+        if (enemyPlayer.name === secondChar[0].name) {
+            $(enemyPlayer).data(secondChar[1]);
+            enemyPlayer.health = secondChar[1].health;
+            console.log(enemyPlayer)
+            $('.rival').replaceWith(`
+    
+                                            <div class="rival card btn btn-primary m-2 p-0 w-100 h-100" id='${secondChar[1].name}'>
+                                                <img src='${secondChar[1].image}' style=' height:100%'>
+                                                <h3 class="health card-img-overlay p-2" id='healthEnemy' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${enemyPlayer.health}</h3>
+                                                <h3 class="attack card-img-overlay p-2" id='' style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack: ${secondChar[1].attackPower}</h3>
+                                            </div>
+    
+                                            `)
+
+
+        }
+        // else replace .enemy row with the secondChar[0] character.
+        else {
+            $(enemyPlayer).attr(secondChar[0]);
+            enemyPlayer.health = secondChar[1].health;
+            $('.rival').replaceWith(`
+    
+                                            <div class="rival card btn btn-primary m-2 p-0 w-100 h-100" id='${secondChar[0].name}'>
+                                                <img src='${secondChar[0].image}' style=' height:100%'>
+                                                <h3 class="health card-img-overlay p-2" id='healthEnemy' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${enemyPlayer.health}</h3>
+                                                <h3 class="attack card-img-overlay p-2" id='' style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack: ${secondChar[0].attackPower}</h3>
+                                            </div>
+    
+                                            `)
+            $('helath').text('Health: ' + secondChar[0].health);
+        }
+
+    }
+
+
+
+    // ==============================================================================================================
+    //============== When 'Restart' button is clicked, reload the page.=============================================
+    // ==============================================================================================================
     $('#reset').click(function reset() {
         location.reload();
     });

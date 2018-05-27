@@ -6,35 +6,39 @@
     <title>Wild West</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
-<style>
-    .container-fluid {
-        background-image: url("assets/images/west_background_2.jpg");
-        background-size: 100%;
-    }
 
-    .character {
-        height: 100px;
-    }
-</style>
 
 <body>
     <div class="container-fluid w-100" style="height: 900px">
-        <div class="row first" style="height: 30%">
+        <div class="row h-100">
+            <div class="col-6">
+                <div class="row first" style="height: 30%">Select
 
+                </div>
+                <div class="row neutral" style="height: 30%">Neutral
+
+                </div>
+                <div class="row enemy" style="height: 30%">Enemy
+
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row h-80" style="height: 80%">
+                    <div class="row video" style="height: 80%">
+                            <!-- <iframe width="640" height="360" src="https://www.youtube.com/embed/5PgAKzmWmuk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>                        -->
+                    </div>
+                    <div class="row h-20">
+                        <div style="height: 100px; width: 80px; background-color: green" id="buttons">Attack</div>
+                        <div style="height: 100px; width: 80px; background-color: red" id="reset" onclick="reset()">Reset</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row neutral" style="height: 30%">
 
-        </div>
-        <div class="row enemy" style="height: 30%">
-
-        </div>
-    </div>
-    <div style="height: 100px; width: 80px; background-color: green" id="buttons">Attack</div>
-    <div style="height: 100px; width: 80px; background-color: red" id="reset" onclick="reset()">Reset</div>
-
-    <script src="assets/javascript/game.js"></script>
+        <script src="assets/javascript/game.js"></script>
 </body>
 
 </html>

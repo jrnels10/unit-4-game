@@ -1,0 +1,15 @@
+
+    .container-fluid {
+        background-image: url("../images/west_background_2.jpg");
+        background-size: 100%;
+    }
+
+    .character {
+        height: 100px;
+    }
+
+    .enemy {
+        font-size: 150px;
+        font-weight: bold;
+        color: white;
+    }
