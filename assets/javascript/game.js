@@ -36,7 +36,6 @@ $(document).ready(function () {
     var damageHealth = 0;
     var neutral = main.find('.neutral');
     var btns = main.find("#buttons");
-    var begin = main.find("#begin");
     
     // ================================================================================
     //========= When the page loads, display the objects as divs on the DOM.============
@@ -56,7 +55,7 @@ $(document).ready(function () {
                             `);
                             $('.first').append(playerChar);
                             $('firstHealth').append('Health: ' + charPlayer[i].health)
-                            console.log(charPlayer[i].health)
+                            console.log(charPlayer[i].name)
         }
 
 
@@ -65,14 +64,14 @@ $(document).ready(function () {
         //===============================================================================
         $('.character').on("click", function () {
             console.log("hello")
-            if ($(this).attr('id') === 'the_good') {
+            if ($(this).attr('id') === 'clint') {
                 firstPlayer = (theGood);
                 playerHealth = (theGood.health)
                 $('#bounty').hide();
                 $('#prisoner').hide();
                 secondChar.push(theBad, theUgly)
             }
-            else if ($(this).attr('id') === 'the_bad') {
+            else if ($(this).attr('id') === 'bounty') {
                 firstPlayer = (theBad);
                 playerHealth = (theBad.health)
                 secondChar.push(theGood, theUgly)
@@ -147,44 +146,12 @@ $(document).ready(function () {
 
                     `);
                 $('.enemy').append(enemyChar)
-                // $('.neutral').hide();
                 $('#healthEnemy').html('Health: ' + enemyPlayer.health)
             })
         })
     };
 
-    // battlearena
-    // begin.on('click', function () {
-    //     console.log(firstPlayer.name + ' vs ' + enemyPlayer.name)
-    //     $('.first').hide();
-    //     $('.neutral').hide();
-    //     $('.enemy').hide();
-    //     var firstChar = $('<div>');
-    //             firstChar.addClass("col-3  m-1 w-100 h-100");
-    //             firstChar.html(`
 
-    //                     <div class="rival card btn btn-primary m-2 p-0 w-100 h-100" id='${firstPlayer.name}'>
-    //                         <img src='${firstPlayer.image}' style='width:100%; height:100%'>
-    //                         <h3 class="health card-img-overlay p-2" id='healthEnemy' style="background-color: maroon; top: 45%; height: 40px; opacity: .75"></h3>
-    //                         <h3 class="attack card-img-overlay p-2" id='attackEnemy' style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75"></h3>
-    //                     </div>
-
-    //                 `);
-    //     $('.fighterOne').append(firstChar);
-    //     var secondChar = $('<div>');
-    //             secondChar.addClass("col-3  m-1 w-100 h-100");
-    //             secondChar.html(`
-
-    //                     <div class="rival card btn btn-primary m-2 p-0 w-100 h-100" id='${enemyPlayer.name}'>
-    //                         <img src='${enemyPlayer.image}' style='width:100%; height:100%'>
-    //                         <h3 class="health card-img-overlay p-2" id='healthEnemy' style="background-color: maroon; top: 45%; height: 40px; opacity: .75"></h3>
-    //                         <h3 class="attack card-img-overlay p-2" id='attackEnemy' style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75"></h3>
-    //                     </div>
-
-    //                 `);
-    //     $('.fighterTwo').append(secondChar)
-        
-    })
 
 
 
