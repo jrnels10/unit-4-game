@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Wild West</title>
+
+    <link rel="reset" href="assets/css/reset.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -15,30 +17,32 @@
     <div class="container-fluid w-100" style="height: 900px">
         <div class="row h-100">
             <div class="col-6">
-                <div class="row first" style="height: 30%">Select
+                <div class="row first" style="height: 30%">
 
                 </div>
-                <div class="row neutral" style="height: 30%">Neutral
+                <div class="row neutral" style="height: 30%">
 
                 </div>
-                <div class="row enemy" style="height: 30%">Enemy
+                <div class="row enemy" style="height: 30%">
 
                 </div>
             </div>
-            <div class="col-6">
-                <div class="row h-80" style="height: 80%">
-                    <div class="row video" style="height: 80%">
-                            <!-- <iframe width="640" height="360" src="https://www.youtube.com/embed/5PgAKzmWmuk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>                        -->
-                    </div>
-                    <div class="row h-20">
-                        <div style="height: 100px; width: 80px; background-color: green" id="buttons">Attack</div>
-                        <div style="height: 100px; width: 80px; background-color: red" id="reset" onclick="reset()">Reset</div>
+            <div class="col-6 h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+
+                        <div class="row video" style="height: 80%">
+                        </div>
+                        <div class="row pl-6" style="height: 20%">
+                            <button id="buttons">Attack</button>
+                            <button id="reset" onclick="reset()">Reset</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <script src="assets/javascript/game.js"></script>
+    </div>
+    <script src="assets/javascript/game.js"></script>
 </body>
 
 </html>

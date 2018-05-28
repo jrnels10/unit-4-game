@@ -8,8 +8,37 @@
         height: 100px;
     }
 
-    .enemy {
+    #enemy {
+        height: 20px;
         font-size: 150px;
         font-weight: bold;
         color: white;
+    }
+    iframe {
+        padding-top: 30px;
+        margin: auto;
+    }
+
+    .vid {
+        margin: auto;
+    }
+
+    button {
+        margin: 20px;
+    }
+
+    .leftSide {
+        margin: auto;
+    }
+
+    #buttons {
+        height: 100px; 
+        width: 150px; 
+        background-color: green;
+    }
+
+    #reset {
+        height: 100px; 
+        width: 150px; 
+        background-color: red;
     }

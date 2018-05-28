@@ -37,6 +37,7 @@ $(document).ready(function () {
     var damageHealth = 0;
     var neutral = main.find('.neutral');
     var btns = main.find("#buttons");
+    var arena = main.find('#arena');
 
     // ==========================================================================================================
     //========= When the page loads, display the objects as divs on the DOM.=====================================
@@ -99,7 +100,7 @@ $(document).ready(function () {
             for (var i = 0; i < secondChar.length; i++) {
                 console.log(secondChar.length)
                 var nuetralChar = $('<div>');
-                nuetralChar.addClass("col-3 h-100");
+                nuetralChar.addClass("col-3  h-100");
                 nuetralChar.html(`
 
                         <div class="opponent card btn btn-primary m-2 p-0 w-100 h-100" id='${secondChar[i].name}'>
@@ -153,9 +154,7 @@ $(document).ready(function () {
     };
 
 
-
-
-
+    
     //=============================================================================================================
     //============== Attack button ================================================================================
     // ============================================================================================================
@@ -171,28 +170,40 @@ $(document).ready(function () {
 
         // if the user loses the battle
         if (firstPlayer.health <= 0) {
-            setTimeout(function() {
+            setTimeout(function () {
                 alert('you lose');
                 confirm('Do you want to play again?')
-                if (true) {
-                    location.reload();
-                }
-                else {
-                    alert("loser");
-                }
-            },2);
+                // if (true) {
+                //     location.reload();
+                // }
+                // else {
+                //     alert("loser");
+                // }
+            }, 2)
         }
 
         // if the user wins the battle. enter in other rival character.
         else if (enemyPlayer.health <= 0) {
-            setTimeout(function() {
-            alert("you've defeated the first enemy");
-            alert('Round two');
-            $('.opponent').hide();
-            enemyDefeated.push(enemyPlayer)
-            console.log(enemyDefeated)
-            replace();
-            },5);
+            setTimeout(function () {
+                alert("you've defeated the first enemy");
+                alert('Round two');
+                $('.opponent').hide();
+                enemyDefeated.push(enemyPlayer)
+                console.log(enemyDefeated)
+                replace();
+            }, 5);
+
+        }
+
+        if (firstPlayer.health <= 0) {
+            console.log(enemyDefeated.length)
+            var videoFinish = $('<div>');
+            videoFinish.addClass("col-12 vid h-100");
+            videoFinish.html(`
+
+            <iframe width="754" height="480" src="https://www.youtube.com/embed/5PgAKzmWmuk?autoplay=true" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            `);
+            $('.video').append(videoFinish)
         }
     })
 
