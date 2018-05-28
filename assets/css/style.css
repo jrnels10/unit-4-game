@@ -2,17 +2,27 @@
     .container-fluid {
         background-image: url("../images/west_background_2.jpg");
         background-size: 100%;
+        background-repeat: no-repeat
     }
 
     .character {
         height: 100px;
     }
 
-    #enemy {
-        height: 20px;
-        font-size: 150px;
-        font-weight: bold;
-        color: white;
+    .health {
+        font-size: 20px;
+        background-color: maroon; 
+        top: 45%; 
+        height: 40px; 
+        opacity: .75
+    }
+
+    .attack {
+        font-size: 20px;
+        background-color: darkgreen; 
+        top: 45%; 
+        height: 40px; 
+        opacity: .75
     }
     iframe {
         padding-top: 30px;

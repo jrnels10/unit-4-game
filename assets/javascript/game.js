@@ -40,11 +40,11 @@ $(document).ready(function () {
     var arena = main.find('#arena');
 
     // ==========================================================================================================
-    //========= When the page loads, display the objects as divs on the DOM.=====================================
+    // ================= create characters to display on html ===================================================
     // ==========================================================================================================
-    window.onload = function () {
+    function first() {
         for (var i = 0; i < charPlayer.length; i++) {
-            firstHealth = charPlayer[i].health;
+            // firstHealth = charPlayer[i].health;
             var playerChar = $('<div>');
             playerChar.addClass("col-3 h-100");
             playerChar.html(`
@@ -53,19 +53,27 @@ $(document).ready(function () {
                             <img src='${charPlayer[i].image}' style=' height:100%'>
                             <h3 class="health card-img-overlay p-2" id='firstHealth' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${charPlayer[i].health}</h3>
                             <h3 class="attack card-img-overlay p-2" id="firstAttack" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack: ${charPlayer[i].attackPower}</h3>
-                       </div>
+                        </div>
                             
                         `);
             $('.first').append(playerChar);
             console.log(charPlayer[i].name)
         }
+    }
 
+    // ==========================================================================================================
+    //========= When the page loads, display the objects as divs on the DOM.=====================================
+    // ==========================================================================================================
+    window.onload = function () {
+
+        // Call on the first function========================================
+        first();
+    
 
         //===============================================================================
         //==============first player being selected======================================
         //===============================================================================
         $('.character').on("click", function () {
-            console.log("hello")
             if ($(this).attr('id') === 'clint') {
                 firstPlayer = (theGood);
                 firstHealth = (charPlayer[0].health)
@@ -91,8 +99,7 @@ $(document).ready(function () {
                 console.log(firstPlayer);
                 console.log(secondChar)
             }
-            // $('#firstHealth').append('Health: ' + firstHealth);
-            console.log(firstHealth)
+            console.log('firstplayer health: ' + firstHealth)
 
 
             // ===================================================================================
@@ -102,14 +109,14 @@ $(document).ready(function () {
                 var nuetralChar = $('<div>');
                 nuetralChar.addClass("col-3  h-100");
                 nuetralChar.html(`
-
-                        <div class="opponent card btn btn-primary m-2 p-0 w-100 h-100" id='${secondChar[i].name}'>
+                
+                <div class="opponent card btn btn-primary m-2 p-0 w-100 h-100" id='${secondChar[i].name}'>
                             <img src='${secondChar[i].image}' style=' height:100%'>
                             <h3 class="health card-img-overlay p-2" id='health' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${secondChar[i].health}</h3>
                             <h3 class="attack card-img-overlay p-2" id="health" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack: ${secondChar[i].attackPower}</h3>
-                        </div>
-
-                    `);
+                            </div>
+                            
+                            `);
                 // append the second row of the DOM
                 neutral.append(nuetralChar);
 
@@ -139,59 +146,48 @@ $(document).ready(function () {
                 var enemyChar = $('<div>');
                 enemyChar.addClass("col-3 h-100");
                 enemyChar.html(`
-
-                        <div class="rival card btn btn-primary m-2 p-0 w-100 h-100" id='${enemyPlayer.name}'>
-                            <img src='${enemyPlayer.image}' style=' height:100%'>
-                            <h3 class="health card-img-overlay p-2" id='healthEnemy' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${enemyPlayer.health}</h3>
-                            <h3 class="attack card-img-overlay p-2" id='attackEnemy' style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack: ${enemyPlayer.attackPower}</h3>
-                        </div>
-
-                    `);
+                
+                <div class="rival card btn btn-primary m-2 p-0 w-100 h-100" id='${enemyPlayer.name}'>
+                <img src='${enemyPlayer.image}' style=' height:100%'>
+                <h3 class="health card-img-overlay p-2" id='healthEnemy' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${enemyPlayer.health}</h3>
+                <h3 class="attack card-img-overlay p-2" id='attackEnemy' style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack: ${enemyPlayer.attackPower}</h3>
+                </div>
+                
+                `);
                 $('.enemy').append(enemyChar)
                 // $(secondChar[i].health).replaceWith(firstPlayer.health)
             })
         })
     };
 
-
-    
     //=============================================================================================================
     //============== Attack button ================================================================================
     // ============================================================================================================
     btns.on('click', function () {
-        // console.log('first player: ' + firstPlayer.name)
-        // console.log('enemy player: ' + enemyPlayer.name)
         firstPlayer.health = firstPlayer.health - enemyPlayer.attackPower;
         enemyPlayer.health = enemyPlayer.health - firstPlayer.attackPower;
         console.log('firstplayer health: ' + firstPlayer.health)
         console.log('enemyplayer health: ' + enemyPlayer.health)
         $('#healthEnemy').html('Health: ' + enemyPlayer.health);
-        $('#firstHealth').html('Health: ' + charPlayer.health)
+        $('#firstHealth').html('Health: ' + firstPlayer.health)
 
         // if the user loses the battle
         if (firstPlayer.health <= 0) {
-            setTimeout(function () {
-                alert('you lose');
-                confirm('Do you want to play again?')
-                // if (true) {
-                //     location.reload();
-                // }
-                // else {
-                //     alert("loser");
-                // }
-            }, 2)
+            firstPlayer.health = 0;
+            $('#firstHealth').html('Health: ' + firstPlayer.health)
+
         }
 
         // if the user wins the battle. enter in other rival character.
         else if (enemyPlayer.health <= 0) {
-            setTimeout(function () {
-                alert("you've defeated the first enemy");
-                alert('Round two');
-                $('.opponent').hide();
-                enemyDefeated.push(enemyPlayer)
-                console.log(enemyDefeated)
-                replace();
-            }, 5);
+            enemyPlayer.health = 0;
+            $('#healthEnemy').html('Health: ' + enemyPlayer.health);
+            alert("you've defeated the first enemy");
+            alert('Round two');
+            $('.opponent').hide();
+            enemyDefeated.push(enemyPlayer)
+            console.log(enemyDefeated)
+            replace();
 
         }
 
@@ -201,13 +197,11 @@ $(document).ready(function () {
             videoFinish.addClass("col-12 vid h-100");
             videoFinish.html(`
 
-            <iframe width="754" height="480" src="https://www.youtube.com/embed/5PgAKzmWmuk?autoplay=true" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe width="754" height="480" src="https://www.youtube.com/embed/5PgAKzmWmuk?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                             `);
             $('.video').append(videoFinish)
         }
     })
-
-
 
     // =============================================================================================================
     //===========after first has been defeated, it replaces the defeated character with the other character=========
@@ -247,7 +241,6 @@ $(document).ready(function () {
         }
 
     }
-
 
 
     // ==============================================================================================================
