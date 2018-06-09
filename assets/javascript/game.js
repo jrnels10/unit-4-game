@@ -9,7 +9,7 @@ $(document).ready(function () {
         image: 'assets/images/the_good_resize.jpg',
         name: 'clint',
         health: 160,
-        attackPower: 80,
+        attackPower: 30,
     };
     // The Bad character
     var theBad = {
@@ -158,7 +158,7 @@ $(document).ready(function () {
                 `);
                 $('.enemy').append(enemyChar)
                 // $(secondChar[i].health).replaceWith(firstPlayer.health)
-                if (enemyPlayer = (theGood) || (theBad) || (theUgly)) {
+                if (enemyPlayer === theGood || enemyPlayer === theBad || enemyplayer === theUgly) {
                     player();
 
                     $('.playerChoice').show();
@@ -179,7 +179,7 @@ $(document).ready(function () {
         playerChoice.html(`
         <div class="rival card btn btn-primary m-2 p-0 w-100 h-100" id='${firstPlayer.name}'>
         <img src='${firstPlayer.image}' style=' height:100%'>
-        <h3 class="health card-img-overlay p-2" id='healthPlay' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${first.health}</h3>
+        <h3 class="health card-img-overlay p-2" id='healthPlay' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${firstPlayer.health}</h3>
         <h3 class="attack card-img-overlay p-2" id='attackPlay' style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack: ${firstPlayer.attackPower}</h3>
         </div>
         `)
