@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('.playerChoice').hide();
     var main = $('body');
     // =====================================================================================================
     // ==================create objects and variables for each of the characters.===========================
@@ -46,9 +47,8 @@ $(document).ready(function () {
         for (var i = 0; i < charPlayer.length; i++) {
             // firstHealth = charPlayer[i].health;
             var playerChar = $('<div>');
-            playerChar.addClass("col-3 h-100");
+            playerChar.addClass("col-3 h-100 p-0 m-1");
             playerChar.html(`
-
                         <div class="character card btn btn-primary m-2 p-0 w-100 h-100" id='${charPlayer[i].name}'>
                             <img src='${charPlayer[i].image}' style=' height:100%'>
                             <h3 class="health card-img-overlay p-2" id='firstHealth' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${charPlayer[i].health}</h3>
@@ -68,7 +68,7 @@ $(document).ready(function () {
 
         // Call on the first function========================================
         first();
-    
+
 
         //===============================================================================
         //==============first player being selected======================================
@@ -96,7 +96,6 @@ $(document).ready(function () {
                 secondChar.push(theGood, theBad)
                 $('#clint').hide();
                 $('#bounty').hide();
-                console.log(firstPlayer);
                 console.log(secondChar)
             }
             console.log('firstplayer health: ' + firstHealth)
@@ -107,19 +106,22 @@ $(document).ready(function () {
             for (var i = 0; i < secondChar.length; i++) {
                 console.log(secondChar.length)
                 var nuetralChar = $('<div>');
-                nuetralChar.addClass("col-3  h-100");
+                nuetralChar.addClass("col-3  h-100 p-0 m-1");
                 nuetralChar.html(`
                 
                 <div class="opponent card btn btn-primary m-2 p-0 w-100 h-100" id='${secondChar[i].name}'>
                             <img src='${secondChar[i].image}' style=' height:100%'>
                             <h3 class="health card-img-overlay p-2" id='health' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${secondChar[i].health}</h3>
                             <h3 class="attack card-img-overlay p-2" id="health" style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack: ${secondChar[i].attackPower}</h3>
-                            </div>
+                </div>
                             
                             `);
                 // append the second row of the DOM
                 neutral.append(nuetralChar);
-
+            }
+            if (secondChar.length == 2) {
+                console.log(secondChar.length)
+                $(".character").unbind("click"); // i want to disable the ability to click this element if current is 1
             }
 
             //==============================================================================
@@ -143,10 +145,10 @@ $(document).ready(function () {
 
                 // =======================================================================
                 // == Once rival is selected, move the selected player to the third row of the DOM====
+
                 var enemyChar = $('<div>');
-                enemyChar.addClass("col-3 h-100");
+                enemyChar.addClass("col-3 h-100 p-0 m-1");
                 enemyChar.html(`
-                
                 <div class="rival card btn btn-primary m-2 p-0 w-100 h-100" id='${enemyPlayer.name}'>
                 <img src='${enemyPlayer.image}' style=' height:100%'>
                 <h3 class="health card-img-overlay p-2" id='healthEnemy' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${enemyPlayer.health}</h3>
@@ -156,6 +158,13 @@ $(document).ready(function () {
                 `);
                 $('.enemy').append(enemyChar)
                 // $(secondChar[i].health).replaceWith(firstPlayer.health)
+                if (enemyPlayer = (theGood) || (theBad) || (theUgly)) {
+                    player();
+
+                    $('.playerChoice').show();
+                    console.log(enemyPlayer.length)
+                    $(".opponent").unbind("click"); // i want to disable the ability to click this element if current is 1
+                }
             })
         })
     };
@@ -163,18 +172,59 @@ $(document).ready(function () {
     //=============================================================================================================
     //============== Attack button ================================================================================
     // ============================================================================================================
+    function player() {
+        $('.first').hide();
+        var playerChoice = $('<div>');
+        playerChoice.addClass('col-3 h-100 p-0 m-1');
+        playerChoice.html(`
+        <div class="rival card btn btn-primary m-2 p-0 w-100 h-100" id='${firstPlayer.name}'>
+        <img src='${firstPlayer.image}' style=' height:100%'>
+        <h3 class="health card-img-overlay p-2" id='healthPlay' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${first.health}</h3>
+        <h3 class="attack card-img-overlay p-2" id='attackPlay' style="background-color: forestgreen; top: 65%; height: 40px; opacity: .75">Attack: ${firstPlayer.attackPower}</h3>
+        </div>
+        `)
+        $('.playerChoice').append(playerChoice);
+    }
     btns.on('click', function () {
+
         firstPlayer.health = firstPlayer.health - enemyPlayer.attackPower;
         enemyPlayer.health = enemyPlayer.health - firstPlayer.attackPower;
-        console.log('firstplayer health: ' + firstPlayer.health)
-        console.log('enemyplayer health: ' + enemyPlayer.health)
+        console.log('firstplayer health: ' + firstPlayer.health);
+        console.log('enemyplayer health: ' + enemyPlayer.health);
         $('#healthEnemy').html('Health: ' + enemyPlayer.health);
-        $('#firstHealth').html('Health: ' + firstPlayer.health)
+        $('#healthPlay').html('Health: ' + firstPlayer.health)
+        if(firstPlayer.name == 'clint') {
+            firstPlayer.health = firstPlayer.health - enemyPlayer.attackPower;
+            var playrHealth = $('<div>');
+            playrHealth.html(`
+            <h3 class="health card-img-overlay p-2" id='firstHealth' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${charPlayer[0].health}</h3>
+            `);
+
+            $('#firstHealth').replaceWith(playrHealth);
+        }
+        // else if (firstPlayer.name == 'bounty'){
+        //     charPlayer[1].health = firstPlayer.health - enemyPlayer.attackPower;
+        //     var playrHealth = $('<div>');
+        //     playrHealth.html(`
+        //     <h3 class="health card-img-overlay p-2" id='firstHealth' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${charPlayer[1].health}</h3>
+        //     `);
+
+        //     $('#firstHealth').replaceWith(playrHealth);            
+        // }
+        // else {
+        //     charPlayer[2].health = firstPlayer.health - enemyPlayer.attackPower;
+        //     var playrHealth = $('<div>');
+        //     playrHealth.html(`
+        //     <h3 class="health card-img-overlay p-2" id='firstHealth' style="background-color: maroon; top: 45%; height: 40px; opacity: .75">Health: ${charPlayer[2].health}</h3>
+        //     `);
+
+        //     $('#prisoner').replaceWith(playrHealth);            
+        // }
 
         // if the user loses the battle
         if (firstPlayer.health <= 0) {
             firstPlayer.health = 0;
-            $('#firstHealth').html('Health: ' + firstPlayer.health)
+            $('#firstHealth').html('Health: ' + firstPlayer.health);
 
         }
 
@@ -196,7 +246,6 @@ $(document).ready(function () {
             var videoFinish = $('<div>');
             videoFinish.addClass("col-12 vid h-100");
             videoFinish.html(`
-
             <iframe width="754" height="480" src="https://www.youtube.com/embed/5PgAKzmWmuk?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                             `);
             $('.video').append(videoFinish)

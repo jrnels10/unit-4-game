@@ -5,50 +5,58 @@
         background-repeat: no-repeat
     }
 
-    .character {
-        height: 100px;
-    }
+    .enemy {
+        width: 100%;
+        height: 450px;
+   }
+   button {
+       height: 50px;
+       width: 100px;
+       text-align: center;
+   }
+   #show-timer {
+       height: 60px;
+       margin: auto;
+       margin-top: 20px;
+       margin-bottom: 20px;
+   }
+   h2, h1{
+       font-size: 60px;
+       color: white;
+       display: block;
+   }
+   .question, .truct {
+       color: white;
+       height: 80%;
+       font-size: 30px;
+       font-weight: bold;
+       text-align: center;
+       margin: auto;
+   }
+   .results {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin: auto;
+   }
 
-    .health {
-        font-size: 20px;
-        background-color: maroon; 
-        top: 45%; 
-        height: 40px; 
-        opacity: .75
-    }
-
-    .attack {
-        font-size: 20px;
-        background-color: darkgreen; 
-        top: 45%; 
-        height: 40px; 
-        opacity: .75
-    }
-    iframe {
-        padding-top: 30px;
-        margin: auto;
-    }
-
-    .vid {
-        margin: auto;
-    }
-
-    button {
-        margin: 20px;
-    }
-
-    .leftSide {
-        margin: auto;
-    }
-
-    #buttons {
-        height: 100px; 
-        width: 150px; 
-        background-color: green;
-    }
-
-    #reset {
-        height: 100px; 
-        width: 150px; 
-        background-color: red;
-    }
+   .answers {
+       font-size: 20px;
+   }
+   #cor {
+       margin:20px;
+       color: red;
+   }
+   #right {
+       margin: 20px;
+       font-weight: bold;
+       color: green;
+   }
+   iframe {
+       margin:20px;
+   }
+   .start {
+       width: 150px;
+       margin: auto;
+   }
